@@ -10,8 +10,7 @@ BATCH_SIZE = 25
 REACT_PERCENTILE = 90
 
 # ============================================================
-# DO NOT EDIT BELOW
-# ============================================================
+
 import time
 import numpy as np
 import torch
@@ -25,7 +24,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 torch.backends.cudnn.benchmark = True
 
 # -------------------------
-# Correct FPR@95TPR
+#FPR@95TPR
 # -------------------------
 def fpr_at_95_tpr(id_scores, ood_scores):
     id_scores = np.sort(id_scores)
@@ -65,7 +64,7 @@ print("Loading ResNet-50...")
 
 model = resnet50(weights=None)
 
-# robust checkpoint loader
+
 ckpt = torch.load(MODEL_CHECKPOINT_PATH, map_location="cpu")
 
 if "state_dict" in ckpt:
@@ -82,9 +81,8 @@ model.load_state_dict(new_state, strict=False)
 model = model.to(device)
 model.eval()
 
-# -------------------------
-# Penultimate feature extractor (CORRECT)
-# -------------------------
+
+
 def extract_features(model, x):
     features = []
 
@@ -98,9 +96,8 @@ def extract_features(model, x):
     feat = torch.flatten(features[0], 1)
     return feat
 
-# -------------------------
-# Estimate ReAct threshold
-# -------------------------
+
+
 print("\nEstimating ReAct threshold...")
 
 activation_log = []
@@ -118,9 +115,7 @@ react_threshold = np.percentile(
 
 print(f"ReAct threshold (p={REACT_PERCENTILE}) = {react_threshold:.4f}")
 
-# -------------------------
-# Inference function
-# -------------------------
+
 def get_energy_scores(loader, name, measure_time=False):
 
     scores = []
@@ -164,9 +159,8 @@ def get_energy_scores(loader, name, measure_time=False):
     else:
         return torch.cat(scores).numpy()
 
-# -------------------------
-# Run evaluation
-# -------------------------
+
+
 print("\nRunning ID inference...")
 id_scores, id_time, id_count = get_energy_scores(id_loader, "ID", measure_time=True)
 
@@ -190,14 +184,10 @@ scores = np.concatenate([id_scores, ood_scores])
 auroc = roc_auc_score(labels, scores)
 fpr95 = fpr_at_95_tpr(id_scores, ood_scores)
 
-# -------------------------
-# Decision Boundary Timing
-# -------------------------
 
 
 print("\nMeasuring decision latency...")
 
-# Same threshold used in FPR@95TPR
 sorted_id = np.sort(id_scores)
 decision_threshold = sorted_id[int(0.05 * len(sorted_id))]
 
@@ -214,7 +204,6 @@ end_time = time.perf_counter()
 
 total_time = end_time - start_time
 
-# nanoseconds per image
 ns_per_image = (total_time / (len(all_scores) * repeat)) * 1e9
 
 
