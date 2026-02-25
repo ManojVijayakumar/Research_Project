@@ -139,7 +139,7 @@ Higher energy values typically correspond to In-Distribution samples.
 ---
 
 
-## 8. Hardware Support
+## 7. Hardware Support
 
 - CPU supported
 - CUDA GPU supported
@@ -151,7 +151,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 
 ---
 
-## 9. Notes
+## 8. Notes
 
 - Ensure that the model checkpoint matches the architecture used.
 - ID dataset should match the model’s training distribution.
