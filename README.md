@@ -72,7 +72,9 @@ Separate folders must be prepared for:
 Open the ODIN script and set the following paths:
 
 MODEL_PATH = "/path/to/models/densenet100.pth"
+
 ID_DATA_PATH = "/path/to/id_dataset/"
+
 OOD_DATA_PATH = "/path/to/ood_dataset/"
 
 ---
@@ -100,7 +102,9 @@ ODIN improves OOD detection by:
 Open the ReAct script and set:
 
 ID_DATASET_PATH = "/path/to/id_dataset/"
+
 OOD_DATASET_PATH = "/path/to/ood_dataset/"
+
 MODEL_CHECKPOINT_PATH = "/path/to/models/resnet50.pth"
 
 ---
