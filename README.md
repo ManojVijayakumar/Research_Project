@@ -51,11 +51,17 @@ GPU acceleration is supported if CUDA is available.
 Both ID and OOD datasets must follow the ImageFolder format:
 
 dataset/
+
  ├── class1/
+ 
  │    ├── image1.png
+ 
  │    ├── image2.png
+ 
  ├── class2/
+ 
  │    ├── image1.png
+ 
  │    ├── image2.png
 
 Separate folders must be prepared for:
