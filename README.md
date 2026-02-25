@@ -75,27 +75,13 @@ MODEL_PATH = "/path/to/models/densenet100.pth"
 ID_DATA_PATH = "/path/to/id_dataset/"
 OOD_DATA_PATH = "/path/to/ood_dataset/"
 
-Example:
-
-MODEL_PATH = "/home/user/models/densenet100.pth"
-ID_DATA_PATH = "/home/user/data/cifar100/test/"
-OOD_DATA_PATH = "/home/user/data/LSUN/"
-
 ---
 
 ### 5.2 Execution
 
 Run the script using:
 
-python odin_script.py --gpu 0 --magnitude 0.002 --temperature 1000
-
-Parameters:
-
---gpu          : GPU index (default = 0)
---magnitude    : Input perturbation magnitude
---temperature  : Logit temperature scaling value
-
----
+python odin_script.py
 
 ### 5.3 Method Description
 
@@ -116,12 +102,6 @@ Open the ReAct script and set:
 ID_DATASET_PATH = "/path/to/id_dataset/"
 OOD_DATASET_PATH = "/path/to/ood_dataset/"
 MODEL_CHECKPOINT_PATH = "/path/to/models/resnet50.pth"
-
-Example:
-
-ID_DATASET_PATH = "/home/user/data/imagenet/val/"
-OOD_DATASET_PATH = "/home/user/data/LSUN/"
-MODEL_CHECKPOINT_PATH = "/home/user/models/resnet50_imagenet.pth"
 
 ---
 
